@@ -6,7 +6,7 @@
 #define MAX_LEN     1000
 #define MAX_BUCKETS 1000
 #define MULTIPLIER    31
-#define LEN			     100
+#define LEN	     100
 
 
 struct wordrec

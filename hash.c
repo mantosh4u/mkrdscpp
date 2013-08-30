@@ -290,7 +290,7 @@ int main(int argc, const char* argv[])
 	* Uncomment these two lines two fetch the additional
 	* information/print about all entries in the hash table.
 	*/
-    // print_hashtable_entry();
+  // print_hashtable_entry();
 	// print_hastable_loadfactor();
 	print_hashtable_statistics();
 	destroy_hastable();

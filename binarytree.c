@@ -69,7 +69,7 @@ void treewalk_inoder(struct tnode* tree)
 
 struct tnode* treesearch(struct tnode* tree, char* key)
 {
-if((tree == NULL)||(strcmp(key, tree->word)== 0))
+	if((tree == NULL)||(strcmp(key, tree->word)== 0))
 		return tree;
 	if(strcmp(key, tree->word) < 0)
 		return treesearch(tree->left,key);

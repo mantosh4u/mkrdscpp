@@ -304,13 +304,13 @@ void polynomial::print_polynomial(void)
 	while(tmp->link != ptr)
 	{
 		printf("(%d,%d,%d,%d)\n",tmp->coefficent,tmp->x_power
-								,tmp->y_power, tmp->z_power);
+					,tmp->y_power, tmp->z_power);
 		tmp = tmp->link;
 	}
 
 	/* The Last Node */
 	printf("(%d,%d,%d,%d)\n",tmp->coefficent,tmp->x_power
-								,tmp->y_power, tmp->z_power);
+				,tmp->y_power, tmp->z_power);
 
 }
 

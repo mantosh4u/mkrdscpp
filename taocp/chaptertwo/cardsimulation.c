@@ -1,4 +1,7 @@
-#include"common.h"
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
 
 enum tag{UP = 0, DOWN = 1};
 
@@ -117,7 +120,6 @@ void cleanup_nodes(void)
 
 
 
-
 int main(int argc, const char* argv[])
 {
 
@@ -127,4 +129,5 @@ int main(int argc, const char* argv[])
 
 	return 0;
 }
+
 

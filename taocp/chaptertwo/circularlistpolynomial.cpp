@@ -69,13 +69,13 @@ void print_polynomial(struct polynomialnode* node)
 	while(tmp->link != node)
 	{
 		printf("(%d,%d,%d,%d)\n",tmp->coefficent,tmp->x_power
-								,tmp->y_power, tmp->z_power);
+					,tmp->y_power, tmp->z_power);
 		tmp = tmp->link;
 	}
 
 	/* The Last Node */
 	printf("(%d,%d,%d,%d)\n",tmp->coefficent,tmp->x_power
-							,tmp->y_power, tmp->z_power);
+				,tmp->y_power, tmp->z_power);
 }
 
 
@@ -342,7 +342,7 @@ void polynomial::print_expression(void)
  * required for this algorithm. Page: 276, Volume:1
  */
 struct polynomialnode* polynomial_addition(struct polynomialnode* pp,
-										   struct polynomialnode* qq )
+					   struct polynomialnode* qq )
 {
 	struct polynomialnode* p  = NULL;
 	struct polynomialnode* q  = NULL;
@@ -451,10 +451,9 @@ void test_polynomial(void)
 
 
 
+
 int main(int argc, const char* argv[])
 {
 	test_polynomial();
 	return 0;
 }
-
-

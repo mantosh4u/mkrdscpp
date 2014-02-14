@@ -11,19 +11,19 @@ typedef boost::filesystem::recursive_directory_iterator rdir_iterator;
 
 class maindirectory {
 public:
-		maindirectory() = default;
+	 maindirectory() = default;
 	~maindirectory() = default;
 	 maindirectory(const maindirectory& obj) = delete;
 	 maindirectory& operator= (const maindirectory& obj) = delete;
 	 maindirectory(maindirectory&& obj) = delete;
 	 maindirectory& operator=(maindirectory&& obj) = delete;
 
-	void		 start_application(int	argc, char** argv);
+	void     start_application(int	argc, char** argv);
 	inline   fspath	 current_working_direct() const { return dirpath; }
 	
 private:
 	fspath   dirpath;
-	bool	    valid_directory{false};		
+	bool	 valid_directory{false};		
 };
 
 

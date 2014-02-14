@@ -51,6 +51,7 @@ public:
 	~scaninputdirectory() = default;
 	void scan_the_inputdirectory(maindirectory& input);
 	void	display_all_entry_with_complete_path();
+	std::vector<fspath> get_files_list(void) { return input_files; }
 	
 private:
 	void	recursive_directory_information();

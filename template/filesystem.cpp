@@ -75,23 +75,19 @@ void scaninputdirectory::scan_the_inputdirectory(maindirectory& input) {
 
 
 bool scaninputdirectory::validate_each_node(fspath node) {
-			
-		// In this implemenation, the source file with extensions *.h,*.cpp,
-		// *.c, *.hpp,*cxx are  valid  one, so take .h and .c 
-		
-		const char	*header_extension = ".h";
-		const char  *code_extension = ".c";
 
-		std::string name = node.extension().native();
-		auto val1 = name.find(header_extension);
-		auto val2 = name.find(code_extension);
-		
-		if((val1 != std::string::npos)||(val2 != std::string::npos)) {
-			return true;
-		}
-		else {
-				return false;
-		}
+	std::string name = node.extension().native();
+	const size_t arrsize = 5;
+	std::array<std::string, arrsize> arrextension = {".h",".c",".cpp",".hpp",".cxx"};
+	std::string::size_type sz = 0;
+	bool output;
+
+	for(const auto& itr: arrextension) {
+		sz = input.find(itr);
+		output = (sz != std::string::npos)&&(input.size() == itr.size());
+		if(output == true) break;
+	}
+	return output;
 }
 
 

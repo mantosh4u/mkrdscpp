@@ -127,68 +127,71 @@ void deque_uses(void) {
 
 
 
-class mydeque
-{
+class mydeque {
 private:
-	size_t numberofslab;
-	size_t sizeofeachslab;
 	list<vector<int>> deque;
-
 public:
-
-	mydeque(size_t x, size_t y){
-		numberofslab = x;
-		sizeofeachslab = y;
-		for(size_t i = 0; i <numberofslab; i++) {
+	mydeque() {
+		/*front vector and back vector to grow in two direction*/
+		for (size_t i = 0; i < 2; i++) {
 			vector<int> tmp;
 			deque.push_back(tmp);
 		}
 	}
-
-	~mydeque() {}
+	~mydeque() { }
 
 	void push_front(const int& node) {
-		list<vector<int>>::size_type sz = deque.size();
 		list<vector<int>>::iterator it = deque.begin();
-		for(list<vector<int>>::size_type i = 0; i < sz; i++){
-			++it;
-		}
-
 		list<vector<int>>::value_type& frontvec = *it;
-		
-		if(frontvec.size()< sizeofeachslab) {
-			frontvec.push_back(node);
-		}
-		/*utility::displaycontainer(frontvec);*/
+		frontvec.push_back(node);
 	}
-
-
-	void push_back(const int& node){
+	void push_back(const int& node) {
 		list<vector<int>>::iterator it = deque.begin();
+		++it;
 		list<vector<int>>::value_type& backvec = *it;
-		if(backvec.size()< sizeofeachslab) {
-			backvec.push_back(node);
+		backvec.push_back(node);
+	}
+	size_t size() const {
+		size_t sz = 0;
+		for(const auto& it:deque){
+			sz += (it).size();
 		}
-		/*utility::displaycontainer(backvec);*/
+		return sz;
+	}
+	size_t max_size() const {
+		size_t sz = 0;
+		for(const auto& it:deque){
+			sz += (it).max_size();
+		}
+		return sz;
+	}
+	bool empty() const {
+		return(size()== 0);
 	}
 
-
+	/*debugging purpose*/
 	void displayall() {
-		for(list<vector<int>>::iterator it = deque.begin();it != deque.end();++it) {
-			list<vector<int>>::value_type& tmp = *it;
-			utility::displaycontainer(tmp);
+		list<vector<int>>::iterator it = deque.begin();
+		list<vector<int>>::value_type& frontvec = *it;
+		size_t vecsize = frontvec.size();
+		for(size_t index = vecsize; index !=0; index--){
+			utility::displaywithtab(frontvec[index-1]);
 		}
+		++it;
+		list<vector<int>>::value_type& backvec = *it;
+		utility::displaycontainer(backvec);
 	}
-
 };
 
 
+
 void mydeque_uses(void) {
-	mydeque testdeque(2,10);
+	mydeque testdeque;
 	testdeque.push_front(1);
 	testdeque.push_front(2);
 	testdeque.push_back(3);
 	testdeque.push_back(4);
 	testdeque.displayall();
+	utility::display(testdeque.size());
 }
 

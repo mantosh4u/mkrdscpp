@@ -127,39 +127,39 @@ void deque_uses(void) {
 
 
 
+template<typename T>
 class mydeque {
 private:
-	list<vector<int>> deque;
+	list<vector<T>> deque;
 public:
 	mydeque() {
-		/*front vector and back vector to grow in two direction*/
+		/*front vector and back vector to grow in two direction(1+1)*/
 		for (size_t i = 0; i < 2; i++) {
-			vector<int> tmp;
+			vector<T> tmp;
 			deque.push_back(tmp);
 		}
 	}
 	~mydeque() { }
-
-	void push_front(const int& node) {
-		list<vector<int>>::iterator it = deque.begin();
-		list<vector<int>>::value_type& frontvec = *it;
+	void push_front(const typename vector<T>::value_type& node) {
+		list<vector<T>>::iterator it = deque.begin();
+		list<vector<T>>::value_type& frontvec = *it;
 		frontvec.push_back(node);
 	}
-	void push_back(const int& node) {
-		list<vector<int>>::iterator it = deque.begin();
+	void push_back(const typename vector<T>::value_type& node) {
+		list<vector<T>>::iterator it = deque.begin();
 		++it;
-		list<vector<int>>::value_type& backvec = *it;
+		list<vector<T>>::value_type& backvec = *it;
 		backvec.push_back(node);
 	}
-	size_t size() const {
-		size_t sz = 0;
+	typename vector<T>::size_type size() const {
+		vector<T>::size_type sz = 0;
 		for(const auto& it:deque){
 			sz += (it).size();
 		}
 		return sz;
 	}
-	size_t max_size() const {
-		size_t sz = 0;
+	typename vector<T>::size_type max_size() const {
+		vector<T>::size_type sz = 0;
 		for(const auto& it:deque){
 			sz += (it).max_size();
 		}
@@ -168,30 +168,89 @@ public:
 	bool empty() const {
 		return(size()== 0);
 	}
+	typename vector<T>::reference operator[](size_t n) {
+		list<vector<T>>::iterator it = deque.begin();
+		list<vector<T>>::value_type& frontvec = *it;
+		++it;
+		list<vector<T>>::value_type& backvec = *it;
+		size_t frontsize = frontvec.size();
+		size_t bacsize = backvec.size();
 
+		if(n >= frontsize) {
+			/*member stored into the backvector*/
+			size_t index = n - frontsize;
+			return backvec[index];
+		}else {
+			/*member stored into the frontvector*/
+			size_t index = bacsize - n;
+			return frontvec[index];
+		}
+	}
+	typename vector<T>::reference front(){
+		list<vector<T>>::iterator it = deque.begin();
+		list<vector<T>>::value_type& frontvec = *it;
+		size_t vecsize = frontvec.size();
+		return frontvec[vecsize -1];
+	}
+	typename vector<T>::reference back(){
+	    list<vector<T>>::iterator it = deque.begin();
+		++it;
+		list<vector<T>>::value_type& backvec = *it;
+		size_t vecsize = backvec.size();
+		return backvec[vecsize -1];
+	}
+
+	void pop_front(){
+		list<vector<T>>::iterator it = deque.begin();
+		list<vector<T>>::value_type& frontvec = *it;
+		frontvec.pop_back();
+	}
+	void pop_back(){
+		list<vector<T>>::iterator it = deque.begin();
+		++it;
+		list<vector<T>>::value_type& backvec = *it;
+		backvec.pop_back();
+	}
 	/*debugging purpose*/
 	void displayall() {
-		list<vector<int>>::iterator it = deque.begin();
-		list<vector<int>>::value_type& frontvec = *it;
+		list<vector<T>>::iterator it = deque.begin();
+		list<vector<T>>::value_type& frontvec = *it;
 		size_t vecsize = frontvec.size();
 		for(size_t index = vecsize; index !=0; index--){
-			utility::displaywithtab(frontvec[index-1]);
+			utility::basicdisplaywithtab(frontvec[index-1]);
 		}
 		++it;
-		list<vector<int>>::value_type& backvec = *it;
+		list<vector<T>>::value_type& backvec = *it;
 		utility::displaycontainer(backvec);
 	}
 };
 
 
 
+
 void mydeque_uses(void) {
-	mydeque testdeque;
+	mydeque<int> testdeque;
 	testdeque.push_front(1);
 	testdeque.push_front(2);
+	testdeque.push_front(5);
 	testdeque.push_back(3);
 	testdeque.push_back(4);
-	testdeque.displayall();
 	utility::display(testdeque.size());
+	utility::display(testdeque.max_size());
+	utility::display(testdeque.empty());
+	utility::display(testdeque[4]);
+	testdeque.displayall();
+	utility::display(testdeque.front());
+	utility::display(testdeque.back());
+	std::cout<<std::endl<<std::endl;
+	for(size_t i = 0; i < testdeque.size(); i++) {
+		utility::basicdisplaywithtab(testdeque[i]);
+	}
+	testdeque.pop_front();
+	testdeque.displayall();
+	testdeque.pop_back();
+	testdeque.displayall();
+	utility::display("\n");
 }
+
 

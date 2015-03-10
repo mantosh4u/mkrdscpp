@@ -16,11 +16,16 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* Chapter: 2 */
+#ifndef LINEARSEARCH_H
+#define LINEARSEARCH_H
+
+
+/****** Chapter: 2 *****/
 #include"CommonHeader.h"
 
 namespace ch02a9unlocked
 {
+	/******************************* Linear Search ****************************/
 	template<typename Predicate>
 	int linear_search(int* arr, size_t size, const int& value, Predicate pred)
 	{
@@ -123,3 +128,5 @@ namespace ch02a9unlocked
 		}
 	}
 }
+
+#endif

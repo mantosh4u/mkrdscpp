@@ -16,37 +16,17 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* Chapter: 3 */
+#ifndef SORTANDSEARCH_H
+#define SORTANDSEARCH_H
+
+
+/***** Chapter: 3 *****/
 #include"CommonHeader.h"
 
 
 namespace ch03a9unlocked
 {
-	int find_minimum(int* arr, size_t size)
-	{
-		int smallest = 0;
-		size_t index = 0;
-		while (size) {
-			if (arr[index] < arr[smallest]) {
-				smallest = index;
-			}
-			--size;
-			++index;
-		}
-		return smallest;
-	}
-
-	void selection_sort(std::vector<int>& ivec, int* arr, size_t size)
-	{
-		for (size_t i = 0; i < size-1; ++i){
-			int smallest = find_minimum(arr+i, size-i);
-			if (arr[smallest+1] < arr[i]) {
-				std::swap(arr[i], arr[smallest]);
-			}
-			display_container(ivec);
-		}
-	}
-
+	/******************************* Binary Search ****************************/
 	int binary_search(int* arr, size_t size, const int& value)
 	{
 		int p = 0;
@@ -73,22 +53,108 @@ namespace ch03a9unlocked
 			display("Value Found on Index: " + std::to_string(out));
 	}
 
-
 	void client_api_binary_search(const int& input) {
 		std::vector<int> ivec = random_generated_collections(input);
 		display_container(ivec);
-		selection_sort(ivec, ivec.data(), ivec.size());
-		display_container(ivec);
 
 		display("Value To Be Found:" + std::to_string(input));
-		int fnumber = ivec.at(0);
 		tmeasureapp timer;
 		timer.start_point();
-		int out = binary_search(ivec.data(), ivec.size(), fnumber);
+		int out = binary_search(ivec.data(), ivec.size(), input);
 		auto totaltime = timer.end_point();
 
 		display_result(out);
-		display("TimeTaken(microsecond) by the binary_search: ");
+		display("TimeTaken(nanoseconds) by the binary_search: ");
 		display(totaltime);
+
 	}
+
+	/******************************* Selection Sort ****************************/
+	int find_minimum(int* arr, size_t size)
+	{
+		int smallest = 0;
+		size_t index = 0;
+		while (size) {
+			if (arr[index] < arr[smallest]) {
+				smallest = index;
+			}
+			--size;
+			++index;
+		}
+		return smallest;
+	}
+
+	void selection_sort(int* arr, size_t size)
+	{
+		if (size == 0){
+			return;
+		}
+		for (size_t i = 0; i < size - 1; i++){
+			int smallest = find_minimum((arr + i), (size - i));
+			if (arr[smallest + i] < arr[i]) {
+				std::swap(arr[smallest + i], arr[i]);
+			}
+		}
+		return;
+	}
+
+	void client_api_selection_sort(const int& input)
+	{
+		std::vector<int> ivec = random_generated_collections(input);
+		display_container(ivec);
+		selection_sort(ivec.data(), ivec.size());
+		display_container(ivec);
+	}
+
+
+
+	/******************************* Insertion Sort ****************************/
+	void insertion_sort(int* arr, size_t size)
+	{
+		if (size == 0){
+			return;
+		}
+		
+		for (size_t i = 1; i < size; i++){
+	
+			//initialization
+			int key = arr[i];
+			int j = i - 1;
+
+			// movement of other at appropriate place based on key
+			while ((j >= 0) && (arr[j] > key)){
+				arr[j + 1] = arr[j];
+				j = j - 1;
+			}
+			// insert the key value to its position
+			arr[j+1] = key;
+		}
+		return;
+	}
+
+	void client_api_insertion_sort(const int& input) {
+		std::vector<int> ivec = random_generated_collections(input);
+		std::sort(ivec.begin(), ivec.end());
+		std::reverse(ivec.begin(), ivec.end());
+		display_container(ivec);
+		insertion_sort(ivec.data(), ivec.size());
+		display_container(ivec);
+	}
+
+
+	
+	/******************************* Merge Sort ****************************/
+
+
+
+
+
 }
+
+
+
+
+
+
+
+#endif

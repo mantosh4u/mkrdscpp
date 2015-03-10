@@ -28,6 +28,7 @@
 #include<utility>
 #include<algorithm>
 #include<random>
+#include<array>
 
 using namespace std::chrono;
 
@@ -46,7 +47,7 @@ void display_container(const Container& c){
 	for (const auto& iter : c){ 
 		displaytab(iter); 
 	}
-	display("\n");
+	std::cout<<std::endl;
 }
 
 
@@ -74,17 +75,26 @@ public:
 	}
 };
 
-using tmeasureapp = timemeasure<microseconds>;
+using tmeasureapp = timemeasure<nanoseconds>;
+
 
 std::vector<int> random_generated_collections(int size) {
-	std::default_random_engine drge;
-	std::uniform_int_distribution<int>	distributionapp(0,size);
+	static unsigned int seed = 10;
+	std::default_random_engine drge(seed);
+	seed++;
 	std::vector<int> out;
-
+	std::uniform_int_distribution<int>	distributionapp(0,size);
+		
 	for (size_t index = 0; index < size; ++index){
 		out.push_back(distributionapp(drge));
 	}
 	return out;
 }
+
+void MySleep(int milisec)
+{
+	std::this_thread::sleep_for(seconds(milisec));
+}
+
 
 #endif

@@ -25,11 +25,25 @@ int main(int argc, const char* argv[]) {
 	int input = 0;
 	if (argc >= 2)
 		input = std::atoi(argv[1]);
-	else 
-		input = 10;		//  1000000
+	else
+		input = 6;
 
-	ch02a9unlocked::client_api_linear_search(input);
-	ch03a9unlocked::client_api_binary_search(10);
+	// ch02a9unlocked::client_api_linear_search(input);
+	// ch03a9unlocked::client_api_binary_search(input);
+	// ch03a9unlocked::client_api_selection_sort(input);
+	// ch03a9unlocked::client_api_insertion_sort(input);
+
+
+	//int count = 0;
+	//while (1)
+	//{
+	//	ch03a9unlocked::client_api_insertion_sort(input);
+	//	MySleep(10);
+	//	count++;
+	//	if (count == 10){
+	//		count = 0;
+	//	}
+	//}
+
 	return 0;
 }
-
